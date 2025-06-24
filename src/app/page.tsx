@@ -8,9 +8,6 @@ export default function Home() {
     <div className="h-[40rem] flex items-center justify-center">
       <TextHoverEffect text="LUMINA" />
     </div>
-    <div className="absolute top-20 right-4">
-      <ModeToggle />
-    </div>
     </>
   );
 }
