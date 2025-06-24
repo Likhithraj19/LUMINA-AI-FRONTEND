@@ -2,6 +2,10 @@ import "./globals.css";
 import { Providers } from "../Providers/providers";
 import { ThemeProvider } from "@/Providers/theme-provider";
 
+export const metadata = {
+  title: "LUMINA-AI",
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
