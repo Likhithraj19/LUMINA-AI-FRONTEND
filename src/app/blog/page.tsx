@@ -1,3 +1,9 @@
+import { BlogSection } from "@/components/blogsection/BlogSection";
+
 export default function BlogPage() {
-    return <div>Blog Page</div>;
+  return (
+    <>
+      <BlogSection />
+    </>
+  );
 }
