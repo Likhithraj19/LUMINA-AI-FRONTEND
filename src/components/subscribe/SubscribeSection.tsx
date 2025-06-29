@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import {
   Modal,
   ModalContent,
@@ -7,64 +7,57 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  Input,
 } from "@heroui/react";
+import { MailIcon } from "lucide-react";
 
-export default function SubscribeSection() {
+type SubscribeSectionProps = {
+  openModal: boolean;
+  onModalClose: () => void;
+}
+
+export default function SubscribeSection({openModal, onModalClose}: SubscribeSectionProps) {
   const {isOpen, onOpen, onClose} = useDisclosure();
-  const [backdrop, setBackdrop] = React.useState<"opaque" | "blur" | "transparent">("opaque");
+  const [backdrop, setBackdrop] = useState<"blur">("blur");
 
-  const backdrops = ["opaque", "blur", "transparent"];
+  useEffect(() => {
+    if(openModal){
+    onOpen();
+    }
+  }, [openModal]);
 
-  const handleOpen = (backdrop: "opaque" | "blur" | "transparent") => {
+  const handleOpen = (backdrop: "blur") => {
     setBackdrop(backdrop);
     onOpen();
   };
 
+  const handleClose = () => {
+    onClose();
+    if(onModalClose){
+      onModalClose();
+    }
+  }
+
   return (
     <>
-      <div className="flex flex-wrap gap-3">
-        {backdrops.map((b : any) => (
-          <Button
-            key={b}
-            className="capitalize"
-            color="warning"
-            variant="flat"
-            onPress={() => handleOpen(b)}
-          >
-            {b}
-          </Button>
-        ))}
-      </div>
-      <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose}>
+      <Modal backdrop={backdrop} isOpen={isOpen} onClose={handleClose}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 text-2xl font-bold">Subscribe for updates</ModalHeader>
               <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-                  risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-                  quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-                  risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-                  quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor
-                  adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit
-                  officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
-                  deserunt nostrud ad veniam.
-                </p>
+              <Input
+                  endContent={
+                    <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                  }
+                  label="Email"
+                  placeholder="Enter your email"
+                  variant="bordered"
+                />
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
+                <Button color="primary" className="cursor-pointer bg-blue-600 hover:bg-blue-700 rounded-lg shadow-[0px_2px_0px_0px_#FFFFFF40_inset] text-white" onPress={handleClose}>
+                  Submit
                 </Button>
               </ModalFooter>
             </>
