@@ -1,9 +1,10 @@
 import React from 'react'
+import SideBar from '@/ChatBotComponents/sidebar/SideBar'
 
-const ChatbotPage = () => {
-  return (
-    <div>ChatBot goes here</div>
-  )
+export default function ChatbotPage() {
+    return (
+        <>
+            <SideBar />
+        </>
+    )
 }
-
-export default ChatbotPage
