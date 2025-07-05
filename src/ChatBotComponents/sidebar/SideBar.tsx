@@ -11,6 +11,7 @@ import {
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import Input from "../input/Input";
+import { BotMessageSquare } from "lucide-react";
 
 export default function SideBar() {
   const links = [
@@ -68,7 +69,7 @@ export default function SideBar() {
                 href: "#",
                 icon: (
                   <img
-                    src="https://assets.aceternity.com/user.png"
+                    src="/assets/images/bot.png"
                     className="h-7 w-7 shrink-0 rounded-full"
                     width={50}
                     height={50}
@@ -87,10 +88,11 @@ export default function SideBar() {
 export const Logo = () => {
   return (
     <a
-      href="#"
+      // href="#"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
-      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-black dark:bg-white" />
+      {/* <img src={BotIconSVG.image} alt="Bot Icon" className="h-10 w-10 shrink-0" /> */}
+      <BotMessageSquare className="h-10 w-10 shrink-0 dark:text-white" />
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -104,10 +106,11 @@ export const Logo = () => {
 export const LogoIcon = () => {
   return (
     <a
-      href="#"
+      // href="#"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
-      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-black dark:bg-white" />
+      {/* <img src={BotIconSVG.src} alt="Bot Icon" className="h-10 w-10 shrink-0" /> */}
+      <BotMessageSquare className="h-10 w-10 shrink-0 dark:text-white" />
     </a>
   );
 };
