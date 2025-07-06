@@ -16,17 +16,17 @@ import { BotMessageSquare } from "lucide-react";
 export default function SideBar() {
   const links = [
     {
-      label: "Home",
-      href: "/",
-      icon: (
-        <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-    {
       label: "Profile",
       href: "/chatbot/profile",
       icon: (
         <IconUserBolt className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
+    },
+    {
+      label: "Dashboard",
+      href: "/chatbot/dashboard",
+      icon: (
+        <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
@@ -88,7 +88,7 @@ export default function SideBar() {
 export const Logo = () => {
   return (
     <a
-      // href="#"
+      href="/chatbot"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
       {/* <img src={BotIconSVG.image} alt="Bot Icon" className="h-10 w-10 shrink-0" /> */}
@@ -106,7 +106,7 @@ export const Logo = () => {
 export const LogoIcon = () => {
   return (
     <a
-      // href="#"
+      href="/chatbot"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
       {/* <img src={BotIconSVG.src} alt="Bot Icon" className="h-10 w-10 shrink-0" /> */}
@@ -121,7 +121,7 @@ const Layout = () => {
       <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
         <div className="flex gap-2">
           <div className="h-full w-full ">
-            <Input />
+            {/* <Input /> */}
           </div>
         </div>
       </div>
