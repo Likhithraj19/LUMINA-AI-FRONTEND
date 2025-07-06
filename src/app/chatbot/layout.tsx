@@ -1,7 +1,12 @@
+import SideBar from "@/ChatBotComponents/sidebar/SideBar";
+
 export default function ChatbotLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    return <div>{children}</div>;
+    return <div>
+        <SideBar />
+        {children}
+        </div>;
 }
