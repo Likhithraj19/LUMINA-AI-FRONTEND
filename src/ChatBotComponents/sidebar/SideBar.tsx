@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import Input from "../input/Input";
 import { BotMessageSquare } from "lucide-react";
 
-export default function SideBar() {
+export default function SideBar({children}:{children:React.ReactNode}) {
   const links = [
     {
       label: "Profile",
@@ -81,7 +81,7 @@ export default function SideBar() {
           </div>
         </SidebarBody>
       </Sidebar>
-      <Layout />
+      <Layout>{children}</Layout>
     </div>
   );
 }
@@ -115,13 +115,13 @@ export const LogoIcon = () => {
   );
 };
 
-const Layout = () => {
+const Layout = ({children}:{children:React.ReactNode}) => {
   return (
     <div className="flex flex-1">
       <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
         <div className="flex gap-2">
           <div className="h-full w-full ">
-            {/* <Input /> */}
+            {children}
           </div>
         </div>
       </div>
