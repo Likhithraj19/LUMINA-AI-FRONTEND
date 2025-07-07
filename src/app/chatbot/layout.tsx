@@ -5,9 +5,9 @@ export default function ChatbotLayout({
 }: {
     children: React.ReactNode;
 }) {
-    return <div>
+    return <>
         <SideBar>
         {children}
         </SideBar>
-        </div>;
+        </>;
 }

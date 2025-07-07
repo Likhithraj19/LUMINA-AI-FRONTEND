@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function HeroSection() {
+  const router = useRouter();
   return (
     <div className="relative mx-auto flex max-w-full flex-col items-center justify-center">
       <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
@@ -62,11 +65,11 @@ export function HeroSection() {
           }}
           className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
         >
-          <button className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-            Explore Now
+          <button className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200" onClick={() => router.push("/chatbot")}>
+            Get Started
           </button>
           <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
-            Contact Support
+            <Link href="https://github.com/Likhithraj19/LUMINA-AI-FRONTEND">GitHub</Link>
           </button>
         </motion.div>
         <motion.div
@@ -86,7 +89,7 @@ export function HeroSection() {
         >
           <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
             <img
-              src="/"       //ChatBot preview Image 
+             src="/assets/images/chatbot.png"       
               alt="Landing page preview"
               className="aspect-[16/9] h-auto w-7xl object-cover"
               height={1000}
