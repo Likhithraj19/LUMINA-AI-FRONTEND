@@ -12,6 +12,7 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import Input from "../input/Input";
 import { BotMessageSquare } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function SideBar({children}:{children:React.ReactNode}) {
   const links = [
@@ -86,9 +87,10 @@ export default function SideBar({children}:{children:React.ReactNode}) {
   );
 }
 export const Logo = () => {
+  const router = useRouter();
   return (
-    <a
-      href="/chatbot"
+    <div
+      onClick={() => router.push("/chatbot")}
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
       {/* <img src={BotIconSVG.image} alt="Bot Icon" className="h-10 w-10 shrink-0" /> */}
@@ -100,7 +102,7 @@ export const Logo = () => {
       >
         LUMINA-AI
       </motion.span>
-    </a>
+    </div>
   );
 };
 export const LogoIcon = () => {
