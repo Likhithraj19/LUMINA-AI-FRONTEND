@@ -9,7 +9,7 @@ export default function InputTwo() {
   const [search, setSearch] = useState(false);
 
   return (
-    <div className=" mt-80 bg-inherit flex flex-col items-center justify-center p-4">
+    <div className=" mt-26 bg-inherit flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-3xl">
         <div className="relative bg-zinc-900 rounded-full shadow-lg">
           <div className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10">
