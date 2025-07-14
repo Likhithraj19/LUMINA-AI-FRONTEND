@@ -1,10 +1,12 @@
 "use client"
 
 import { Input } from "@/components/ui/input";
+import axios, { AxiosResponse } from "axios";
 import { Plus, Search, Edit3, Mic, Send } from 'lucide-react';
 import { useState } from "react";
 
 export default function InputTwo() {
+
   const [search, setSearch] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,21 +18,15 @@ export default function InputTwo() {
     setLoading(true);
     
     try {
-      const res = await fetch("http://localhost:5000/q", {
-        method: "POST",
+      const res: AxiosResponse = await axios.post("http://localhost:5000/q", {
+        input
+      }, {
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ input }),
+        }
       });
       
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
-      
-      const data = await res.json();
-      setResponse(data.response);
-      
+      setResponse(res.data.response);
       setInput("");
     } catch (error) {
       console.error("Error sending message:", error);
@@ -48,7 +44,7 @@ export default function InputTwo() {
   return (
     <div className="mt-20 bg-inherit flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-3xl">
-        {response && (
+      {response && (
           <div className="mb-6 p-4 bg-zinc-800 rounded-lg text-gray-100">
             <p>{response}</p>
           </div>
@@ -73,9 +69,9 @@ export default function InputTwo() {
             <button 
               className="p-2 hover:bg-gray-800 rounded-full transition-colors cursor-pointer"
               onClick={handleSendMessage}
-              disabled={loading || !input.trim()}
+            disabled={loading || !input.trim()}
             >
-              <Send className={`w-6 h-6 ${loading ? 'text-gray-600' : 'text-gray-400'}`} />
+               <Send className={`w-6 h-6 ${loading ? 'text-gray-600' : 'text-gray-400'}`} />
             </button>
             
             <button className="p-2 hover:bg-gray-800 rounded-full transition-colors cursor-pointer ">
