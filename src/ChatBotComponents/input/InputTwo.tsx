@@ -5,12 +5,55 @@ import { Plus, Search, Edit3, Mic, Send } from 'lucide-react';
 import { useState } from "react";
 
 export default function InputTwo() {
-
   const [search, setSearch] = useState(false);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState("");
+
+  const handleSendMessage = async () => {
+    if (!input.trim()) return;
+    
+    setLoading(true);
+    
+    try {
+      const res = await fetch("http://localhost:5000/q", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ input }),
+      });
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      
+      const data = await res.json();
+      setResponse(data.response);
+      
+      setInput("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
+    }
+  };
 
   return (
-    <div className=" mt-26 bg-inherit flex flex-col items-center justify-center p-4">
+    <div className="mt-20 bg-inherit flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-3xl">
+        {response && (
+          <div className="mb-6 p-4 bg-zinc-800 rounded-lg text-gray-100">
+            <p>{response}</p>
+          </div>
+        )}
+        
         <div className="relative bg-zinc-900 rounded-full shadow-lg">
           <div className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10">
             <Plus className="w-6 h-6 text-gray-400" />
@@ -20,11 +63,19 @@ export default function InputTwo() {
             placeholder="Ask Lumina"
             className="w-full bg-transparent text-gray-100 pl-16 pr-16 py-8 placeholder-gray-400 border-none focus:ring-0 focus:outline-none rounded-full h-16 "
             style={{ fontSize: '16px' }}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            disabled={loading}
           />
           
           <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex items-center space-x-3 z-10">
-            <button className="p-2 hover:bg-gray-800 rounded-full transition-colors cursor-pointer ">
-              <Send className="w-6 h-6 text-gray-400" />
+            <button 
+              className="p-2 hover:bg-gray-800 rounded-full transition-colors cursor-pointer"
+              onClick={handleSendMessage}
+              disabled={loading || !input.trim()}
+            >
+              <Send className={`w-6 h-6 ${loading ? 'text-gray-600' : 'text-gray-400'}`} />
             </button>
             
             <button className="p-2 hover:bg-gray-800 rounded-full transition-colors cursor-pointer ">
