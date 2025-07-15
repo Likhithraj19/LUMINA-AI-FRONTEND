@@ -5,7 +5,16 @@ import axios, { AxiosResponse } from "axios";
 import { Plus, Mic, Send } from 'lucide-react';
 import { useState } from "react";
 
-export default function InputTwo() {
+interface Message {
+  content: string;
+  isUser: boolean;
+}
+
+interface InputTwoProps {
+  onNewMessage: (message: Message) => void;
+}
+
+export default function InputTwo({ onNewMessage }: InputTwoProps) {
 
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,6 +24,13 @@ export default function InputTwo() {
     if (!input.trim()) return;
     
     setLoading(true);
+
+    const userMessage: Message = {
+      content: input,
+      isUser: true
+    };
+
+    onNewMessage(userMessage);
     
     try {
       const res: AxiosResponse = await axios.post("http://localhost:5000/q", {
@@ -24,11 +40,23 @@ export default function InputTwo() {
           "Content-Type": "application/json",
         }
       });
-      
-      setResponse(res.data.response);
+
+      const botMessage: Message = {
+        content: res.data.response,
+        isUser: false
+      };
+
+      onNewMessage(botMessage);
+      // setResponse(res.data.response);
       setInput("");
     } catch (error) {
       console.error("Error sending message:", error);
+
+      const errorMessage: Message = {
+        content: "Sorry, I couldn't process your request. Please try again.",
+        isUser: false
+      };
+      onNewMessage(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -41,14 +69,14 @@ export default function InputTwo() {
   };
 
   return (
-    <div className="mt-20 bg-inherit flex flex-col items-center justify-center p-4">
+    <div className="mt-20 bg-inherit flex flex-col items-center justify-center p-4 w-full">
     <div className="w-full max-w-3xl">
 
-      {response && (
+      {/* {response && (
         <div className="mb-6 p-4 bg-zinc-800 rounded-lg text-gray-100">
           <p>{response}</p>
         </div>
-      )}
+      )} */}
     
     <div className="relative bg-inherit rounded-full shadow-lg">
       {/* <div className="w-full max-w-3xl relative bg-zinc-900 rounded-full shadow-lg"> */}
@@ -58,7 +86,7 @@ export default function InputTwo() {
         
         <Input
           placeholder="Ask Lumina"
-          className="w-full bg-transparent text-gray-100 pl-16 pr-16 py-8 placeholder-gray-400 border-none focus:ring-0 focus:outline-none rounded-full h-16 "
+          className="w-full bg-transparent text-gray-100 pl-16 pr-16 py-8 placeholder-gray-400 border-none focus:ring-0 focus:outline-none rounded-full h-16 text-lg"
           style={{ fontSize: '16px' }}
           value={input}
           onChange={(e) => setInput(e.target.value)}
