@@ -41,24 +41,24 @@ export default function InputTwo() {
   };
 
   return (
-    <div className="flex flex-col h-full">
-    <div className="flex-grow overflow-y-auto p-4">
+    <div className="mt-20 bg-inherit flex flex-col items-center justify-center p-4">
+    <div className="w-full max-w-3xl">
+
       {response && (
         <div className="mb-6 p-4 bg-zinc-800 rounded-lg text-gray-100">
           <p>{response}</p>
         </div>
       )}
-    </div>
     
-    <div className="fixed bottom-8 left-0 right-0 px-4 flex justify-center">
-      <div className="w-full max-w-3xl relative bg-zinc-900 rounded-full shadow-lg">
+    <div className="relative bg-inherit rounded-full shadow-lg">
+      {/* <div className="w-full max-w-3xl relative bg-zinc-900 rounded-full shadow-lg"> */}
         <div className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10">
           <Plus className="w-6 h-6 text-gray-400" />
         </div>
         
         <Input
           placeholder="Ask Lumina"
-          className="w-full bg-transparent text-gray-100 pl-16 pr-16 py-8 placeholder-gray-400 border-none focus:ring-0 focus:outline-none rounded-full h-16"
+          className="w-full bg-transparent text-gray-100 pl-16 pr-16 py-8 placeholder-gray-400 border-none focus:ring-0 focus:outline-none rounded-full h-16 "
           style={{ fontSize: '16px' }}
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -80,6 +80,7 @@ export default function InputTwo() {
           </button>
         </div>
       </div>
+    {/* </div>   */}
     </div>
   </div>
   );
