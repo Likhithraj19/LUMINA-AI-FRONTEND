@@ -42,7 +42,9 @@ export default function ChatbotPage() {
              ))}
            </div>
          )}
-         <InputTwo onNewMessage={handleNewMessage} />
+         <div className={`${messages.length === 0 ? 'mt-24' : ''} w-full`}>
+           <InputTwo onNewMessage={handleNewMessage} />
+         </div>
        </div>
        </>
     )
