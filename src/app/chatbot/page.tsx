@@ -23,11 +23,11 @@ export default function ChatbotPage() {
     };
     return (
        <>
-       <div className="flex flex-col items-center w-full">
+       <div className="flex flex-col items-center w-full h-full">
          {!hasStartedConversation && <Header/>}
          {!hasStartedConversation && <SuggestonBox/>}
          {messages.length > 0 && (
-           <div className="w-full max-w-4xl overflow-y-auto p-4 mb-20 pt-10">
+           <div className="flex-1 w-full max-w-4xl overflow-y-auto p-4 pt-10 pb-4">
              {messages.map((message, index) => (
                <div 
                  key={index} 

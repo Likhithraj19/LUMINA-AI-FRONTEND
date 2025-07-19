@@ -69,7 +69,7 @@ export default function InputTwo({ onNewMessage }: InputTwoProps) {
   };
 
   return (
-    <div className="mt-20 bg-inherit flex flex-col items-center justify-center p-4 w-full">
+    <div className="bg-inherit flex flex-col items-center justify-center p-4 w-full">
     <div className="w-full max-w-3xl">
 
       {/* {response && (
