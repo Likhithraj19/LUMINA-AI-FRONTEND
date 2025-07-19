@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export function HeroSection() {
   const router = useRouter();
@@ -88,7 +89,7 @@ export function HeroSection() {
           className="relative z-10 mt-20 rounded-3xl border border-neutral-200 bg-neutral-100 p-4 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
         >
           <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
-            <img
+            <Image
              src="/assets/images/chatbot.png"       
               alt="Landing page preview"
               className="aspect-[16/9] h-auto w-7xl object-cover"
