@@ -5,7 +5,7 @@
 import Header from '@/ChatBotComponents/header/Header'
 import InputTwo from '@/ChatBotComponents/input/InputTwo'
 import SuggestonBox from '@/ChatBotComponents/suggestions/SuggestonBox'
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 
 interface Message {
     content: string;
@@ -16,6 +16,13 @@ export default function ChatbotPage() {
 
     const [hasStartedConversation, setHasStartedConversation] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+      if(messagesEndRef.current){
+        messagesEndRef.current.scrollIntoView({behavior : "smooth"})
+      }
+    }, [messages])
     
     const handleNewMessage = (newMessage: Message) => {
       setHasStartedConversation(true);
@@ -40,6 +47,7 @@ export default function ChatbotPage() {
                  <p>{message.content}</p>
                </div>
              ))}
+             <div ref={messagesEndRef} />
            </div>
          )}
          <div className={`${messages.length === 0 ? 'mt-24' : ''} w-full`}>
