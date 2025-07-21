@@ -7,27 +7,39 @@ import InputTwo from '@/ChatBotComponents/input/InputTwo'
 import SuggestonBox from '@/ChatBotComponents/suggestions/SuggestonBox'
 import React, {useState, useEffect, useRef} from 'react'
 
+import { Spinner } from '@heroui/react';
+
 interface Message {
+    id: string;
     content: string;
     isUser: boolean;
-  }
+    isLoading?: boolean;
+}
 
 export default function ChatbotPage() {
-
     const [hasStartedConversation, setHasStartedConversation] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
+    const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
       if(messagesEndRef.current){
         messagesEndRef.current.scrollIntoView({behavior : "smooth"})
       }
-    }, [messages])
+    }, [messages, isWaitingForResponse])
     
     const handleNewMessage = (newMessage: Message) => {
       setHasStartedConversation(true);
-      setMessages(prev => [...prev, newMessage]);
+      
+      if (newMessage.isUser) {
+        setIsWaitingForResponse(true);
+        setMessages(prev => [...prev, newMessage]);
+      } else {
+        setIsWaitingForResponse(false);
+        setMessages(prev => [...prev, newMessage]);
+      }
     };
+    
     return (
        <>
        <div className="flex flex-col items-center w-full h-full">
@@ -47,6 +59,13 @@ export default function ChatbotPage() {
                  <p>{message.content}</p>
                </div>
              ))}
+             
+             {isWaitingForResponse && (
+               <div className="mb-6 p-4 mr-auto max-w-[80%] flex items-center">
+                 <Spinner classNames={{label: "text-foreground mt-4"}} variant='dots' />
+               </div>
+             )}
+             
              <div ref={messagesEndRef} />
            </div>
          )}
