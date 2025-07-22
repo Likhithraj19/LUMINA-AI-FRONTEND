@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import Input from "../input/Input";
 import { BotMessageSquare } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Model from "../model/Model";
 
 export default function SideBar({children}:{children:React.ReactNode}) {
   const links = [
@@ -120,7 +121,10 @@ export const LogoIcon = () => {
 const Layout = ({children}:{children:React.ReactNode}) => {
   return (
     <div className="flex flex-1">
-      <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
+      <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900 relative">
+        <div className="absolute top-4 left-4">
+          <Model/>
+        </div>
         <div className="flex flex-col gap-2 h-full">
           <div className="h-full w-full flex flex-col">
             {children}
