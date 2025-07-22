@@ -52,7 +52,7 @@ export default function ChatbotPage() {
                  key={index} 
                  className={`mb-6 p-4 rounded-lg ${
                    message.isUser 
-                     ? "bg-zinc-800 text-gray-100 ml-auto max-w-[80%]" 
+                     ? "bg-zinc-800 text-gray-100 ml-auto w-fit max-w-[80%]" 
                      : "bg-inherit text-gray-100 mr-auto max-w-[80%]"
                  }`}
                >
