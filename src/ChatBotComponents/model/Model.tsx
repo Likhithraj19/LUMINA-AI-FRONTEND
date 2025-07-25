@@ -1,5 +1,6 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@heroui/react";
+import { NavbarButton } from "@/components/navbar/navbar-menu";
 import { ChevronDown, Check, Zap, Brain } from "lucide-react";
 import { IconCaretDownFilled, IconSparkles } from "@tabler/icons-react";
 
@@ -67,9 +68,9 @@ export default function Model() {
           <DropdownMenuItem>
             <h1 className="text-md font-medium text-transparent pl-2 w-[400px] bg-clip-text bg-gradient-to-r from-blue-400 via-violet-300 to-purple-300">Upgrade to Lumina AI Pro</h1>
 
-            <Button className="ml-2 mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg">
+            <NavbarButton variant="gradient">
               Upgrade
-            </Button>
+            </NavbarButton> 
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
