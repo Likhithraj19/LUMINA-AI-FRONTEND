@@ -69,7 +69,7 @@ export default function ChatbotPage() {
              <div ref={messagesEndRef} />
            </div>
          )}
-         <div className={`${messages.length === 0 ? 'mt-24' : ''} w-full`}>
+         <div className={`${messages.length === 0 ? 'mt-10' : ''} w-full`}>
            <InputTwo onNewMessage={handleNewMessage} />
          </div>
        </div>
