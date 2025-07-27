@@ -2,7 +2,8 @@
 
 import { Input } from "@/components/ui/input";
 import axios, { AxiosResponse } from "axios";
-import { Plus, Mic, Send } from 'lucide-react';
+import { Plus, Mic, Send, Clipboard, Image, Video } from 'lucide-react';
+// import { IconSend2 } from "@tabler/icons-react";
 import { useState } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
@@ -23,7 +24,7 @@ export default function InputTwo({ onNewMessage }: InputTwoProps) {
 
   const handleSendMessage = async () => {
     if (!input.trim() || loading) return;
-    
+
     setLoading(true);
     const userInput = input;
     setInput("");
@@ -35,7 +36,7 @@ export default function InputTwo({ onNewMessage }: InputTwoProps) {
     };
 
     onNewMessage(userMessage);
-    
+
     try {
       const res: AxiosResponse = await axios.post("http://localhost:5000/q", {
         input: userInput
@@ -78,22 +79,28 @@ export default function InputTwo({ onNewMessage }: InputTwoProps) {
         <div className="relative bg-inherit rounded-full shadow-lg">
           <div className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10">
             <div className="flex items-center gap-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Plus className="w-6 h-6 text-gray-400" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="bg-neutral-800 w-48">
-                  <DropdownMenuItem className="flex items-center gap-2">
-                    <div className="flex items-center gap-2">
-                      Attach File
-                      <Plus className="w-6 h-6 text-gray-400" /> 
-                    </div>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="cursor-pointer size-14 outline-none">
+                  <Plus className="w-6 h-6 text-gray-400" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="bg-neutral-800 text-gray-200 w-56 box-shadow-xl rounded-xl p-2  ">
+                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-neutral-400 rounded-xl">
+                    <Clipboard className="w-4 h-4 text-gray-400" />
+                    Add File
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                    <Image className="w-4 h-4 text-gray-400" />
+                    Add Image
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                    <Video className="w-4 h-4 text-gray-400" />
+                    Add Video
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
-          
+
           <Input
             placeholder="Ask Lumina"
             className="w-full bg-transparent text-gray-100 pl-16 pr-16 py-8 placeholder-gray-400 border-none focus:ring-0 focus:outline-none rounded-full h-16 text-lg"
@@ -103,16 +110,16 @@ export default function InputTwo({ onNewMessage }: InputTwoProps) {
             onKeyDown={handleKeyDown}
             disabled={loading}
           />
-          
+
           <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex items-center space-x-3 z-10">
-            <button 
+            <button
               className="p-2 hover:bg-gray-800 rounded-full transition-colors cursor-pointer"
               onClick={handleSendMessage}
               disabled={loading || !input.trim()}
             >
               <Send className={`w-6 h-6 ${loading ? 'text-gray-600' : 'text-gray-400'}`} />
             </button>
-            
+
             <button className="p-2 hover:bg-gray-800 rounded-full transition-colors cursor-pointer">
               <Mic className="w-6 h-6 text-gray-400" />
             </button>
