@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import axios, { AxiosResponse } from "axios";
 import { Plus, Mic, Send } from 'lucide-react';
 import { useState } from "react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 interface Message {
   id: string;
@@ -76,7 +77,21 @@ export default function InputTwo({ onNewMessage }: InputTwoProps) {
       <div className="w-full max-w-3xl">
         <div className="relative bg-inherit rounded-full shadow-lg">
           <div className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10">
-            <Plus className="w-6 h-6 text-gray-400" />
+            <div className="flex items-center gap-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Plus className="w-6 h-6 text-gray-400" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="bg-neutral-800 w-48">
+                  <DropdownMenuItem className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
+                      Attach File
+                      <Plus className="w-6 h-6 text-gray-400" /> 
+                    </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            </div>
           </div>
           
           <Input
