@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import axios, { AxiosResponse } from "axios";
-import { Plus, Mic, Send, Clipboard, Image, Video } from 'lucide-react';
+import { Plus, Mic, Send, Clipboard, Image, Video, X } from 'lucide-react';
 // import { IconSend2 } from "@tabler/icons-react";
 import { useState } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -21,6 +21,7 @@ interface InputTwoProps {
 export default function InputTwo({ onNewMessage }: InputTwoProps) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -79,9 +80,9 @@ export default function InputTwo({ onNewMessage }: InputTwoProps) {
         <div className="relative bg-inherit rounded-full shadow-lg">
           <div className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10">
             <div className="flex items-center gap-4">
-              <DropdownMenu>
+              <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
                 <DropdownMenuTrigger className="cursor-pointer size-14 outline-none">
-                  <Plus className="w-6 h-6 text-gray-400" />
+                  {isOpen ? <X className="w-6 h-6 text-gray-400" /> : <Plus className="w-6 h-6 text-gray-400" />}
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" className="bg-neutral-800 text-gray-200 w-56 box-shadow-xl rounded-xl p-2  ">
                   <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-neutral-400 rounded-xl">
