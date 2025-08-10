@@ -104,7 +104,7 @@ export default function InputTwo({ onNewMessage }: InputTwoProps) {
 
           <Input
             placeholder="Ask Lumina"
-            className="w-full bg-transparent text-gray-100 pl-16 pr-16 py-8 placeholder-gray-400 border-none focus:ring-0 focus:outline-none rounded-full h-16 text-lg"
+            className="w-full bg-transparent text-gray-100 pl-16 pr-32 py-8 placeholder-gray-400 border-none focus:ring-0 focus:outline-none rounded-full h-16 text-lg"
             style={{ fontSize: '16px' }}
             value={input}
             onChange={(e) => setInput(e.target.value)}
